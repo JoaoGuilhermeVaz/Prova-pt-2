@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro de Usuários</title>
+</head>
+<body>
+    <h1>Cadastro de Usuários</h1>
+    
+    <form id="formularioCadastro">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+        
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <button type="button" onclick="adicionarUsuario()">Adicionar Usuário</button>
+    </form>
+    
+    <h2>Usuários Cadastrados</h2>
+    <button type="button" onclick="listarUsuarios()">Listar Usuários</button>
+
+    <script>
+        let usuarios = [];
+
+        function adicionarUsuario() {
+            let nome = document.getElementById("nome").value;
+            let idade = document.getElementById("idade").value;
+            let email = document.getElementById("email").value;
+
+            if (!nome || !idade || !email) {
+                alert("Erro: Todos os campos devem ser preenchidos.");
+                return;
+            }
+
+            if (idade <= 0) {
+                alert("Erro: A idade deve ser maior que 0.");
+                return;
+            }
+
+            let usuario = {
+                nome: nome,
+                idade: parseInt(idade),
+                email: email
+            };
+
+            usuarios.push(usuario);
+
+            alert("Usuário adicionado com sucesso!");
+
+            document.getElementById("formularioCadastro").reset();
+        }
+
+        function listarUsuarios() {
+            if (usuarios.length === 0) {
+                console.log("Nenhum usuário cadastrado.");
+            } else {
+                console.log("Lista de usuários cadastrados:");
+                usuarios.forEach(function(usuario, index) {
+                    console.log(`${index + 1}. Nome: ${usuario.nome}, Idade: ${usuario.idade}, Email: ${usuario.email}`);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
